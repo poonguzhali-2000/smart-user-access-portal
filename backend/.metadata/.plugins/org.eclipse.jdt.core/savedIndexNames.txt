@@ -94,7 +94,6 @@ INDEX VERSION 1.134+C:\Users\poong\OneDrive\Desktop\Projects\smart-user-access-p
 768066711.index
 18765237.index
 2236452203.index
-1965174767.index
 2579700249.index
 4140809659.index
 390722811.index
