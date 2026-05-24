@@ -83,3 +83,18 @@ Used:
 - @Service
 - @Autowired
 - Dependency Injection
+
+## Controller Layer
+
+Created AppUserController for REST APIs.
+
+Implemented:
+- POST /api/users
+- GET /api/users
+
+Learned:
+- @RestController
+- @RequestBody
+- @GetMapping
+- @PostMapping
+- CORS handling
