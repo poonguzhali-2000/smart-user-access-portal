@@ -1,6 +1,10 @@
 package com.smartportal.backend.entity;
 
+import com.smartportal.backend.enums.Role;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +24,10 @@ public class AppUser {
 
     private String password;
 
-    private String role;
+//    private String role;
+    
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public AppUser() {
 
@@ -58,11 +65,19 @@ public class AppUser {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
+	public Role getRole() {
+		return role;
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
 }

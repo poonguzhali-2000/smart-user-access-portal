@@ -40,3 +40,33 @@ Hibernate automatically generated users table in MariaDB.
 Created AppUserRepository using JpaRepository.
 
 Spring Data JPA automatically provides CRUD operations and generates queries from method names.
+
+## Service Layer
+Created AppUserService for business logic handling.
+
+Implemented methods:
+- saveUser()
+- findByEmail()
+- getAllUsers()
+
+Used Dependency Injection with @Autowired.
+
+## Role Enum
+
+Created Role enum to manage fixed user roles.
+
+Why Enum?
+- Prevents typo mistakes
+- Improves type safety
+- Professional backend practice
+
+Used:
+@Enumerated(EnumType.STRING)
+
+This stores readable values like:
+ADMIN
+GENERAL_USER
+
+instead of:
+0
+1
