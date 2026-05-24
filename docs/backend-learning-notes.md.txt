@@ -30,3 +30,13 @@ Configured datasource in application.properties.
 
 ## Spring Security
 Disabled default login page using SecurityConfig.
+
+## JPA Entity
+Created AppUser entity using JPA annotations.
+
+Hibernate automatically generated users table in MariaDB.
+
+## Repository Layer
+Created AppUserRepository using JpaRepository.
+
+Spring Data JPA automatically provides CRUD operations and generates queries from method names.
