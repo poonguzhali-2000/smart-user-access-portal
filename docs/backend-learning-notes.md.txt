@@ -31,25 +31,14 @@ Configured datasource in application.properties.
 ## Spring Security
 Disabled default login page using SecurityConfig.
 
+---
+
 ## JPA Entity
 Created AppUser entity using JPA annotations.
 
 Hibernate automatically generated users table in MariaDB.
 
-## Repository Layer
-Created AppUserRepository using JpaRepository.
-
-Spring Data JPA automatically provides CRUD operations and generates queries from method names.
-
-## Service Layer
-Created AppUserService for business logic handling.
-
-Implemented methods:
-- saveUser()
-- findByEmail()
-- getAllUsers()
-
-Used Dependency Injection with @Autowired.
+---
 
 ## Role Enum
 
@@ -64,9 +53,33 @@ Used:
 @Enumerated(EnumType.STRING)
 
 This stores readable values like:
-ADMIN
-GENERAL_USER
+- ADMIN
+- GENERAL_USER
 
 instead of:
-0
-1
+- 0
+- 1
+
+---
+
+## Repository Layer
+Created AppUserRepository using JpaRepository.
+
+Spring Data JPA automatically provides:
+- CRUD operations
+- automatic query generation from method names
+
+---
+
+## Service Layer
+Created AppUserService for business logic handling.
+
+Implemented methods:
+- saveUser()
+- findByEmail()
+- getAllUsers()
+
+Used:
+- @Service
+- @Autowired
+- Dependency Injection
