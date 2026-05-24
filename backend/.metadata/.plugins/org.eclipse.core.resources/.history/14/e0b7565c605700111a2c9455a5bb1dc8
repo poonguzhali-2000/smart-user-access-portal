@@ -1,0 +1,5 @@
+package com.smartportal.backend.config;
+
+public class SecurityConfig {
+
+}

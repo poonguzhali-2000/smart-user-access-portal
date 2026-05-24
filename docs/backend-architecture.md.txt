@@ -1,0 +1,9 @@
+# Backend Architecture
+
+Browser
+↓
+Tomcat Server
+↓
+Spring Boot Application
+↓
+MariaDB Database

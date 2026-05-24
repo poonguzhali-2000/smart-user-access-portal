@@ -1,0 +1,32 @@
+# Backend Learning Notes
+
+## Spring Initializr
+Created Spring Boot backend project using Maven.
+
+Dependencies:
+- Spring Web
+- Spring Data JPA
+- Spring Security
+- Lombok
+- MariaDB Driver
+- Validation
+
+---
+
+## Maven
+Used for dependency management and project build.
+
+---
+
+## Spring Boot
+Used embedded Tomcat server.
+
+---
+
+## MariaDB
+Configured datasource in application.properties.
+
+---
+
+## Spring Security
+Disabled default login page using SecurityConfig.
