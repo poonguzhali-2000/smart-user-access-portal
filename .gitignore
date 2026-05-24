@@ -1,0 +1,30 @@
+# Java
+target/
+*.class
+*.log
+
+# Maven
+.mvn/
+
+# Eclipse / STS
+.project
+.classpath
+.settings/
+.metadata/
+
+# STS Snapshots
+*.snap
+
+# Node
+node_modules/
+
+# Angular
+dist/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
