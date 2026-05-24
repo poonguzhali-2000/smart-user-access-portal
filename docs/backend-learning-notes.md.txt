@@ -84,17 +84,26 @@ Used:
 - @Autowired
 - Dependency Injection
 
-## Controller Layer
+## REST Controller Layer
 
-Created AppUserController for REST APIs.
+Created AppUserController using:
+- @RestController
+- @RequestMapping
+- @CrossOrigin
 
-Implemented:
+Implemented APIs:
 - POST /api/users
 - GET /api/users
 
-Learned:
-- @RestController
-- @RequestBody
-- @GetMapping
-- @PostMapping
-- CORS handling
+## Postman API Testing
+
+Tested APIs using Postman.
+
+Verified:
+- User creation
+- Database insertion
+- Fetch all users API
+
+## Database Verification
+
+Verified inserted users directly in MariaDB database table.
