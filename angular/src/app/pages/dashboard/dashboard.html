@@ -1,1 +1,37 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+    <div class="navbar">
+        <h2>Smart User Access Portal</h2>
+        <button pButton label="Logout" severity="danger" (click)="logout()"></button>
+    </div>
+    <div class="dashboard-content">
+        <div class="welcome-card">
+            <h1>Welcome User</h1>
+            <p>JWT Authentication Successful</p>
+        </div>
+
+        <div class="table-card">
+            <h2>User Records</h2>
+            <p-table [value]="users" [tableStyle]="{ 'min-width': '60rem' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-user>
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.fullName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <p-tag [value]="user.role" [severity]="getSeverity(user.role)"></p-tag>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

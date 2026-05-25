@@ -1,0 +1,24 @@
+.dashboard-container {
+    min-height: 100vh;
+    background: #f4f7fa;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #1e293b;
+    color: white;
+}
+
+.dashboard-content {
+    padding: 2rem;
+}
+
+.welcome-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}

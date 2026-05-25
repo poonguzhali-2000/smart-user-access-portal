@@ -1,4 +1,6 @@
-# Backend Learning Notes
+# Learning Notes
+
+# Backend 
 
 ## Spring Initializr
 Created Spring Boot backend project using Maven.
@@ -265,3 +267,57 @@ Flow:
 5. JWT token returned
 6. Token stored in localStorage
 7. User redirected to dashboard
+
+---
+
+## Angular Backend API Integration
+
+Integrated Angular frontend with Spring Boot backend APIs using HttpClient.
+
+Created:
+- UserService
+
+Implemented:
+- GET API integration
+- Observable-based API handling
+- Real-time user data fetching
+
+Used:
+- HttpClient
+- RxJS Observable
+- subscribe()
+
+Fetched backend data from:
+GET /api/users
+
+Displayed dynamic user data in PrimeNG table.
+
+---
+
+## PrimeNG Data Table
+
+Implemented PrimeNG DataTable for displaying backend records.
+
+Features:
+- Dynamic data rendering
+- Role-based tags
+- Responsive table layout
+- Styled enterprise dashboard UI
+
+Used Components:
+- p-table
+- p-tag
+- p-button
+
+---
+
+## Frontend Dashboard Module
+
+Created dashboard page for authenticated users.
+
+Features:
+- Navbar
+- Logout functionality
+- User records table
+- JWT-based dashboard access
+- Responsive UI layout
