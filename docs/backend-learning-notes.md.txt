@@ -141,3 +141,35 @@ Created:
 
 Implemented login endpoint:
 POST /api/users/login
+
+## JWT Authentication Filter
+
+Created JwtAuthFilter using OncePerRequestFilter.
+
+Responsibilities:
+- Read JWT token from Authorization header
+- Extract user email from token
+- Validate token
+- Authenticate user automatically in Spring Security context
+
+Used:
+- SecurityContextHolder
+- UsernamePasswordAuthenticationToken
+- JwtUtil token validation methods
+
+## JWT Protected APIs
+
+Implemented JWT authentication filter for securing APIs.
+
+Created:
+- JwtAuthFilter
+- SecurityConfig
+
+Implemented:
+- Stateless authentication
+- JWT token validation
+- Protected API access
+
+Verified:
+- Unauthorized access blocked
+- Authorized requests allowed using Bearer token
