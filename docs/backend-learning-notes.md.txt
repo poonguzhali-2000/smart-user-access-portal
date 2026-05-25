@@ -173,3 +173,26 @@ Implemented:
 Verified:
 - Unauthorized access blocked
 - Authorized requests allowed using Bearer token
+
+## Angular Frontend Initialization
+
+Created Angular frontend using Angular CLI.
+
+Configuration:
+- Standalone architecture
+- Angular Routing enabled
+- CSS styling
+- SSR disabled
+
+Angular application runs on:
+http://localhost:4200
+
+## Angular Routing
+
+Configured Angular standalone routing using app.routes.ts.
+
+Routes:
+- / → Login Page
+- /dashboard → Dashboard Page
+
+Used <router-outlet> for SPA navigation.
