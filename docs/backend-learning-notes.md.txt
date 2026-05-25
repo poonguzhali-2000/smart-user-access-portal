@@ -107,3 +107,20 @@ Verified:
 ## Database Verification
 
 Verified inserted users directly in MariaDB database table.
+
+## BCrypt Password Encryption
+
+Implemented BCryptPasswordEncoder for secure password storage.
+
+Passwords are encrypted before saving into database.
+
+Why BCrypt?
+- Industry standard password hashing
+- Prevents plain-text password storage
+- Improves backend security
+
+Created:
+- PasswordConfig class
+
+Updated:
+- AppUserService saveUser() method
