@@ -120,7 +120,8 @@ Why BCrypt?
 - Improves backend security
 
 Created:
-- PasswordConfig class
+- PasswordConfig class - removed
+- Configured PasswordEncoder bean inside SecurityConfig.
 
 Updated:
 - AppUserService saveUser() method
@@ -196,3 +197,71 @@ Routes:
 - /dashboard → Dashboard Page
 
 Used <router-outlet> for SPA navigation.
+
+---
+
+## PrimeNG Integration
+
+Integrated PrimeNG UI library for modern Angular UI components.
+
+Installed:
+- primeng
+- primeicons
+- @primeuix/themes
+
+Configured:
+- Aura Theme
+- Angular Animations
+- PrimeNG Provider
+
+Used Components:
+- pInputText
+- pPassword
+- pButton
+
+---
+
+## Reactive Forms
+
+Implemented Reactive Forms for login functionality.
+
+Used:
+- FormBuilder
+- FormGroup
+- Validators
+
+Features:
+- Email validation
+- Password validation
+- Reactive form submission
+
+---
+
+## Angular Service Layer
+
+Created AuthService for frontend-backend communication.
+
+Used:
+- HttpClient
+- Observable
+- LoginRequest model
+- LoginResponse model
+
+Implemented:
+- Login API integration
+- JWT token handling
+
+---
+
+## Frontend Authentication Flow
+
+Implemented login authentication flow between Angular and Spring Boot.
+
+Flow:
+1. User enters credentials
+2. Angular Reactive Form validates input
+3. AuthService calls backend API
+4. Spring Boot validates credentials
+5. JWT token returned
+6. Token stored in localStorage
+7. User redirected to dashboard
