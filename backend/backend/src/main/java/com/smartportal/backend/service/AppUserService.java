@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.smartportal.backend.config.JwtUtil;
 import com.smartportal.backend.entity.AppUser;
 import com.smartportal.backend.repository.AppUserRepository;
 
@@ -18,6 +19,9 @@ public class AppUserService {
     
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private JwtUtil jwtUtil;
 
 //    public AppUser saveUser(AppUser appUser) {
 //        return appUserRepository.save(appUser);
@@ -38,5 +42,27 @@ public class AppUserService {
 
     public List<AppUser> getAllUsers() {
         return appUserRepository.findAll();
+    }
+    
+    public String login(String email, String password) {
+
+        AppUser user =
+                appUserRepository
+                        .findByEmail(email)
+                        .orElseThrow(
+                                () -> new RuntimeException("User not found")
+                        );
+
+        boolean passwordMatched =
+                passwordEncoder.matches(
+                        password,
+                        user.getPassword()
+                );
+
+        if (!passwordMatched) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        return jwtUtil.generateToken(user.getEmail());
     }
 }

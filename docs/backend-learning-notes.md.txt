@@ -124,3 +124,20 @@ Created:
 
 Updated:
 - AppUserService saveUser() method
+
+## Login Authentication
+
+Implemented secure login authentication flow.
+
+Features:
+- Email-based login
+- BCrypt password verification
+- JWT token generation
+
+Created:
+- JwtUtil
+- LoginRequest DTO
+- LoginResponse DTO
+
+Implemented login endpoint:
+POST /api/users/login
