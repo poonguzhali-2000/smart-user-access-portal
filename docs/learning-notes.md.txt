@@ -1,8 +1,9 @@
 # Learning Notes
 
-# Backend 
+# Backend
 
 ## Spring Initializr
+
 Created Spring Boot backend project using Maven.
 
 Dependencies:
@@ -16,26 +17,31 @@ Dependencies:
 ---
 
 ## Maven
+
 Used for dependency management and project build.
 
 ---
 
 ## Spring Boot
+
 Used embedded Tomcat server.
 
 ---
 
 ## MariaDB
+
 Configured datasource in application.properties.
 
 ---
 
 ## Spring Security
+
 Disabled default login page using SecurityConfig.
 
 ---
 
 ## JPA Entity
+
 Created AppUser entity using JPA annotations.
 
 Hibernate automatically generated users table in MariaDB.
@@ -65,6 +71,7 @@ instead of:
 ---
 
 ## Repository Layer
+
 Created AppUserRepository using JpaRepository.
 
 Spring Data JPA automatically provides:
@@ -74,6 +81,7 @@ Spring Data JPA automatically provides:
 ---
 
 ## Service Layer
+
 Created AppUserService for business logic handling.
 
 Implemented methods:
@@ -86,6 +94,8 @@ Used:
 - @Autowired
 - Dependency Injection
 
+---
+
 ## REST Controller Layer
 
 Created AppUserController using:
@@ -97,6 +107,8 @@ Implemented APIs:
 - POST /api/users
 - GET /api/users
 
+---
+
 ## Postman API Testing
 
 Tested APIs using Postman.
@@ -106,9 +118,13 @@ Verified:
 - Database insertion
 - Fetch all users API
 
+---
+
 ## Database Verification
 
 Verified inserted users directly in MariaDB database table.
+
+---
 
 ## BCrypt Password Encryption
 
@@ -121,12 +137,13 @@ Why BCrypt?
 - Prevents plain-text password storage
 - Improves backend security
 
-Created:
-- PasswordConfig class - removed
-- Configured PasswordEncoder bean inside SecurityConfig.
+Configured:
+- PasswordEncoder bean inside SecurityConfig
 
 Updated:
 - AppUserService saveUser() method
+
+---
 
 ## Login Authentication
 
@@ -145,6 +162,8 @@ Created:
 Implemented login endpoint:
 POST /api/users/login
 
+---
+
 ## JWT Authentication Filter
 
 Created JwtAuthFilter using OncePerRequestFilter.
@@ -159,6 +178,8 @@ Used:
 - SecurityContextHolder
 - UsernamePasswordAuthenticationToken
 - JwtUtil token validation methods
+
+---
 
 ## JWT Protected APIs
 
@@ -177,6 +198,10 @@ Verified:
 - Unauthorized access blocked
 - Authorized requests allowed using Bearer token
 
+---
+
+# Frontend
+
 ## Angular Frontend Initialization
 
 Created Angular frontend using Angular CLI.
@@ -190,6 +215,8 @@ Configuration:
 Angular application runs on:
 http://localhost:4200
 
+---
+
 ## Angular Routing
 
 Configured Angular standalone routing using app.routes.ts.
@@ -198,7 +225,7 @@ Routes:
 - / → Login Page
 - /dashboard → Dashboard Page
 
-Used <router-outlet> for SPA navigation.
+Used `<router-outlet>` for SPA navigation.
 
 ---
 
@@ -322,6 +349,27 @@ Features:
 - JWT-based dashboard access
 - Responsive UI layout
 
+---
+
+## Angular Route Guard
+
+Implemented Angular Route Guard for protecting secured routes.
+
+Features:
+- Prevent unauthorized dashboard access
+- Redirect unauthenticated users to login page
+- Token-based route validation
+
+Used:
+- CanActivate
+- Angular Router
+- localStorage token verification
+
+Protected Route:
+- /dashboard
+
+---
+
 ## JWT Interceptor
 
 Implemented Angular HTTP interceptor for automatic JWT token attachment.
@@ -330,8 +378,12 @@ Features:
 - Automatically injects Bearer token
 - Centralized API authentication
 - Reduces repeated authorization code
+- Secures backend API communication
 
 Used:
 - HttpInterceptorFn
 - request cloning
 - Authorization headers
+
+Verified:
+- JWT token automatically attached to secured API requests
