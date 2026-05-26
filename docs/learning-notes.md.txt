@@ -321,3 +321,17 @@ Features:
 - User records table
 - JWT-based dashboard access
 - Responsive UI layout
+
+## JWT Interceptor
+
+Implemented Angular HTTP interceptor for automatic JWT token attachment.
+
+Features:
+- Automatically injects Bearer token
+- Centralized API authentication
+- Reduces repeated authorization code
+
+Used:
+- HttpInterceptorFn
+- request cloning
+- Authorization headers
