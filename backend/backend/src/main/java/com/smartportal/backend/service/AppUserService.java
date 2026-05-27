@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.smartportal.backend.config.JwtUtil;
+import com.smartportal.backend.dto.LoginResponse;
 import com.smartportal.backend.entity.AppUser;
 import com.smartportal.backend.repository.AppUserRepository;
 
@@ -28,11 +29,9 @@ public class AppUserService {
 //    }
     
     public AppUser saveUser(AppUser appUser) {
-
         appUser.setPassword(
             passwordEncoder.encode(appUser.getPassword())
         );
-
         return appUserRepository.save(appUser);
     }
 
@@ -44,25 +43,13 @@ public class AppUserService {
         return appUserRepository.findAll();
     }
     
-    public String login(String email, String password) {
-
-        AppUser user =
-                appUserRepository
-                        .findByEmail(email)
-                        .orElseThrow(
-                                () -> new RuntimeException("User not found")
-                        );
-
-        boolean passwordMatched =
-                passwordEncoder.matches(
-                        password,
-                        user.getPassword()
-                );
-
+    public LoginResponse login(String email, String password) {
+        AppUser user = appUserRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        boolean passwordMatched = passwordEncoder.matches( password, user.getPassword() );
         if (!passwordMatched) {
             throw new RuntimeException("Invalid password");
         }
-
-        return jwtUtil.generateToken(user.getEmail());
-    }
-}
+        String token = jwtUtil.generateToken(user.getEmail());
+        return new LoginResponse(token, user.getRole().name());
+    	}
+	}

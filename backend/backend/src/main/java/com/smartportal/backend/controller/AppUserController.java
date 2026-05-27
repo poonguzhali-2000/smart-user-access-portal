@@ -34,16 +34,7 @@ public class AppUserController {
     }
     
     @PostMapping("/login")
-    public LoginResponse login(
-            @RequestBody LoginRequest request
-    ) {
-
-        String token =
-                appUserService.login(
-                        request.getEmail(),
-                        request.getPassword()
-                );
-
-        return new LoginResponse(token);
+    public LoginResponse login(@RequestBody LoginRequest request) {
+        return appUserService.login(request.getEmail(), request.getPassword());
     }
 }

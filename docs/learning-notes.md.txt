@@ -387,3 +387,97 @@ Used:
 
 Verified:
 - JWT token automatically attached to secured API requests
+
+## Role-Based Access Control (RBAC)
+
+Implemented Role-Based Access Control (RBAC) using JWT authentication and Angular conditional rendering.
+
+Roles Implemented:
+- ADMIN
+- GENERAL_USER
+
+---
+
+## Backend Role Management
+
+Used Role Enum for defining fixed application roles.
+
+Implemented:
+- Role-based JWT authentication
+- Spring Security role authorization
+- JWT role extraction and validation
+
+Used:
+- SimpleGrantedAuthority
+- UsernamePasswordAuthenticationToken
+- SecurityContextHolder
+
+Verified:
+- ADMIN authentication
+- GENERAL_USER authentication
+- JWT role persistence
+
+---
+
+## Frontend Role-Based Rendering
+
+Implemented dynamic Angular UI rendering based on logged-in user role.
+
+Features:
+- Admin-specific dashboard controls
+- General User dashboard access
+- Dynamic welcome messages
+- Conditional component rendering
+
+Used:
+- Angular @if
+- localStorage role persistence
+- JWT role response handling
+
+Examples:
+- ADMIN → Welcome Admin
+- GENERAL_USER → Welcome User
+
+---
+
+## Admin Dashboard Features
+
+Implemented admin-only dashboard section.
+
+Features:
+- Admin controls panel
+- User management access UI
+- Elevated access visualization
+
+Displayed only when:
+role === 'ADMIN'
+
+---
+
+## General User Dashboard Features
+
+Implemented General User dashboard section.
+
+Features:
+- Restricted dashboard view
+- View-only access display
+- User-specific access panel
+
+Displayed only when:
+role === 'GENERAL_USER'
+
+---
+
+## JWT Role Persistence
+
+Stored authenticated user role inside browser localStorage.
+
+Stored:
+- JWT token
+- User role
+
+Used for:
+- Dashboard rendering
+- Route protection
+- Session persistence
+

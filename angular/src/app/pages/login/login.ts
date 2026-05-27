@@ -7,6 +7,8 @@ import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +19,10 @@ import { AuthService } from '../../services/auth.service';
     InputTextModule,
     PasswordModule,
     ButtonModule,
-    CardModule
+    CardModule,
+    ToastModule
   ],
+  providers: [MessageService],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
@@ -31,7 +35,8 @@ export class Login {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {
     this.loginForm = this.fb.group({
       email: [
@@ -61,14 +66,27 @@ export class Login {
     this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
           console.log(response);
-          localStorage.setItem( 'token', response.token );
-          alert('Login Success');
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('role', response.role);
+          // alert('Login Success');
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Login Successful'
+          });
           this.loading = false;
-          this.router.navigate(['/dashboard']);
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 1500);
         },
         error: (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Invalid Email or Password'
+          });
           console.error(error);
-          alert('Invalid Credentials');
+          // alert('Invalid Credentials');
           this.loading = false;
         }
       });
