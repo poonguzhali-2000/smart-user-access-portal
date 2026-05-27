@@ -82,9 +82,14 @@ export class Signup {
           }, 3000);
         },
         error: (error) => {
-          console.error(error);        
-          this.loading = false;        
-        }        
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Registration Failed',
+            detail: error.error?.message || 'Email already exists'
+          });
+          console.error(error);
+          this.loading = false;
+        }
       }); 
     }    
   }

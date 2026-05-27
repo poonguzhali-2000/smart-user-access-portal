@@ -3,6 +3,7 @@ package com.smartportal.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,9 +30,9 @@ public class AppUserController {
     @Autowired
     private AppUserService appUserService;
 
-    @PostMapping
-    public AppUser createUser(@RequestBody AppUser appUser) {
-        return appUserService.saveUser(appUser);
+    @PostMapping("/signup")
+    public AppUser createUser(@RequestBody AppUser appUser){
+        return appUserService.saveUser(appUser); 
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -47,7 +48,7 @@ public class AppUserController {
             Thread.sleep(delay);
         }
 
-        return appUserService.getUsers(search, PageRequest.of(page, size));
+        return appUserService.getUsers(search, PageRequest.of(page, size, Sort.by("id").ascending()));
     }
     
     @PostMapping("/login")

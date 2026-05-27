@@ -31,7 +31,10 @@ public class AppUserService {
 //    }
     
     public AppUser saveUser(AppUser appUser) {
-        appUser.setPassword(
+        if (appUserRepository.findByEmail(appUser.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already exists");
+        }
+    	appUser.setPassword(
             passwordEncoder.encode(appUser.getPassword())
         );
         return appUserRepository.save(appUser);
@@ -46,12 +49,7 @@ public class AppUserService {
         if (search == null || search.trim().isEmpty()) {
         	users = appUserRepository.findByActiveTrue(pageable);
         } else {
-        	users = appUserRepository
-                .findByActiveTrueAndFullNameContainingIgnoreCaseOrActiveTrueAndEmailContainingIgnoreCase(
-                        search,
-                        search,
-                        pageable
-                );
+        	users = appUserRepository.searchUsers(search, pageable);
         }
         return users.map(user ->
         new UserResponseDTO(

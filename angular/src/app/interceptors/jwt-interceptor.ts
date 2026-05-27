@@ -4,8 +4,7 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 
   const token = localStorage.getItem('token');
 
-  const isPublicRequest = req.url.includes('/login') 
-  || (req.url.endsWith('/users') && req.method === 'POST');
+  const isPublicRequest = req.url.includes('/login') || req.url.includes('/signup');
 
   if (token && !isPublicRequest) {
     const clonedReq = req.clone({

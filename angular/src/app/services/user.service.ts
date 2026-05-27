@@ -17,7 +17,7 @@ export class UserService {
   // }
 
   getUsers(page: number, size: number, search: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}?page=${page}&size=${size}&search=${search}&delay=3000`);
+    return this.http.get<any>(`${this.apiUrl}?page=${page}&size=${size}&search=${search}&delay=500`);
   }
 
   deleteUser(id: number): Observable<any> {

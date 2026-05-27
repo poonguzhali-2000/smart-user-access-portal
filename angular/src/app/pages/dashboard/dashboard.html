@@ -68,18 +68,14 @@
         @if (role === 'ADMIN') {
             <div class="table-card">
                 <h2>User Records</h2>
-                @if (loading) {
-                    <div class="spinner-container">
-                        <p-progressSpinner></p-progressSpinner>
-                    </div>
-                }
             
                 <div class="mb-3">
                     <input pInputText type="text" placeholder="Search users..." class="w-full" [(ngModel)]="searchText" (input)="onSearch()">
                 </div>
             
-                @if (!loading) {
-                <p-table [value]="users" [paginator]="true" [rows]="rows" [totalRecords]="totalRecords" (onPage)="onPageChange($event)" [loading]="loading" [tableStyle]="{ 'min-width': '60rem' }">
+                <p-table [value]="users" [paginator]="true" [rows]="rows" [totalRecords]="totalRecords" [first]="first" [lazy]="true"
+                         (onPage)="onPageChange($event)" [loading]="userLoading" [showLoader]="true" loadingIcon="pi pi-spin pi-spinner"
+                         [tableStyle]="{ 'min-width': '60rem' }">
                     <ng-template pTemplate="header">
                         <tr>
                             <th>S.NO</th>
@@ -92,7 +88,7 @@
 
                     <ng-template pTemplate="body" let-user let-rowIndex="rowIndex">
                         <tr>
-                            <td>{{ page * rows + rowIndex + 1 }}</td>
+                            <td>{{ rowIndex + 1 }}</td>
                             <td>{{ user.fullName }}</td>
                             <td>{{ user.email }}</td>
                             <td>
@@ -104,10 +100,44 @@
                                 </td>
                         </tr>
                     </ng-template>
+
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="5" class="text-center">No users found</td>
+                        </tr>
+                    </ng-template>
                 </p-table>
-            }
             </div>
         }
+
+        <div class="table-card">
+            <h2>{{ role === 'ADMIN' ? 'Access Records' : 'My Access Records' }}</h2>
+            <p-table [value]="records" [tableStyle]="{ 'min-width': '60rem' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Module Name</th>
+                        <th>Access Level</th>
+                        <th>Status</th>
+                    </tr>
+                </ng-template>
+                
+                <ng-template pTemplate="body" let-record>
+                    <tr>
+                        <td>{{ record.id }}</td>
+                        <td>{{ record.moduleName }}</td>
+                        <td><p-tag [value]="record.accessLevel" severity="info"></p-tag></td>
+                        <td><p-tag [value]="record.status" severity="success"></p-tag></td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="4" class="text-center">No access records available</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
     </div>
 </div>
 

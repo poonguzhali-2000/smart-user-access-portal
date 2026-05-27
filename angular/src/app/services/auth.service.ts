@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient } from '@angular/common/http';
-
 import { Observable } from 'rxjs';
-
 import { LoginRequest } from '../models/login-request';
-
 import { LoginResponse } from '../models/login-response';
 import { SignupRequest } from '../models/signup-request';
 
@@ -22,6 +18,6 @@ export class AuthService {
   }
 
   signup(data: SignupRequest) {
-    return this.http.post('http://localhost:8080/api/users', data);
+    return this.http.post('http://localhost:8080/api/users/signup', data);
   }
 }

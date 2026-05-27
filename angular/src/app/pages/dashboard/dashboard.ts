@@ -12,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { AccessRecordService } from '../../services/access-record.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,13 +33,16 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './dashboard.css'
 })
 export class Dashboard {
-  loading = true;
+  userLoading = false;
+  recordLoading = false;
   role = '';
   email = '';
   users: User[] = [];
+  records: any[] = [];
   
   totalRecords = 0;
   page = 0;
+  first = 0;
   rows = 5;
   searchText = '';
 
@@ -53,53 +57,79 @@ export class Dashboard {
   constructor(
     private router: Router,
     private userService: UserService,
+    private accessRecordService: AccessRecordService,
     private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role') || '';
     this.email = localStorage.getItem('email') || '';
-    this.loadUsers();
+    if (this.role === 'ADMIN') {
+      this.loadUsers();
+    }
+    this.loadRecords();
   }
-
+  
   loadUsers() {
-    this.loading = true;
-      this.userService.getUsers(this.page, this.rows, this.searchText).subscribe({
+    if (this.role !== 'ADMIN') {
+      return;
+    }
+    this.userLoading = true;
+    this.userService.getUsers(this.page, this.rows, this.searchText).subscribe({
+      next: (response) => {
+        this.users = response.content;
+        this.totalRecords = response.totalElements;
+        this.userLoading = false;
+      },
+      error: (error) => {
+        this.userLoading = false;
+        console.error(error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to load users'
+        });
+      }
+    });
+  }
+    
+    loadRecords() {
+      this.recordLoading = true;
+      const request = this.role === 'ADMIN' ? this.accessRecordService.getAllRecords()
+       : this.accessRecordService.getMyRecords();
+       
+       request.subscribe({
         next: (response) => {
-           const data = response.content;
-           if (this.role === 'ADMIN') {
-            this.users = data;
-          } else {
-            this.users = data.filter(
-              (user: User) =>
-                user.email === this.email
-            );
-          }
-          this.totalRecords = response.totalElements;
-          this.loading = false;
-          console.log(response);
+          this.records = response;
+          this.recordLoading = false;
         },
         error: (error) => {
-          this.loading = false;
+          this.recordLoading = false;
           console.error(error);
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Failed to load users'
+            detail: 'Failed to load access records'
           });
         }
       });
     }
 
   onPageChange(event: any) {
-    this.page = event.first / event.rows;
+    this.first = event.first;
     this.rows = event.rows;
-    this.loadUsers();
+    this.page = Math.floor(event.first / event.rows);
+    if (this.role === 'ADMIN') {
+      this.loadUsers();
+    }
   }
   
   onSearch() {
     this.page = 0;
-    this.loadUsers();
+    this.first = 0;
+    if (this.role === 'ADMIN') {
+      this.loadUsers();
+    }
   }
 
   editUser(user: User) {
@@ -116,7 +146,9 @@ export class Dashboard {
           detail: 'User updated successfully'
         });
         this.displayEditDialog = false;
-        this.loadUsers();
+        if (this.role === 'ADMIN') {
+          this.loadUsers();
+        }
       },
       error: (error) => {
         this.messageService.add({
@@ -140,7 +172,9 @@ export class Dashboard {
           summary: 'Deleted',
           detail: 'User deleted successfully'
         });
-        this.loadUsers();
+        if (this.role === 'ADMIN') {
+          this.loadUsers();
+        }
       },
       error: (error) => {
         this.messageService.add({
