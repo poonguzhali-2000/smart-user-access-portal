@@ -1,0 +1,29 @@
+<p-toast></p-toast>
+
+<div class="login-container">
+    <p-card header="User Signup">
+        <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+            <div class="field">
+                <label>Full Name</label>
+                <input pInputText formControlName="fullName" class="w-full" />
+            </div>
+
+            <div class="field mt-3">
+                <label>Email</label>
+                <input pInputText formControlName="email" class="w-full" />
+            </div>
+
+            <div class="field mt-3">
+                <label>Password</label>
+                <p-password formControlName="password" [feedback]="false"></p-password>
+            </div>
+
+            <div class="field mt-3">
+                <label>Confirm Password</label>
+                <p-password formControlName="confirmPassword" [feedback]="false"></p-password>
+            </div>
+
+            <button pButton type="submit" label="Register" class="w-full mt-4"></button>
+        </form>
+    </p-card>
+</div>

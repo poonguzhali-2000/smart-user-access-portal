@@ -8,10 +8,29 @@
         #4facfe,
         #00f2fe
     );
+    padding: 2rem;
 }
 
-.login-card {
+.signup-card {
     width: 400px;
+}
+
+:host ::ng-deep .p-card {
+    width: 100%;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+
+:host ::ng-deep .p-card .p-card-title {
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+:host ::ng-deep .p-card .p-card-content {
+    padding-top: 1rem;
 }
 
 .field {
@@ -23,12 +42,42 @@
 .field label {
     margin-bottom: 8px;
     font-weight: 600;
+    color: #334155;
 }
 
-.full-width {
+.w-full {
     width: 100%;
 }
 
-.email-input {
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+:host ::ng-deep .p-inputtext,
+:host ::ng-deep .p-password input {
+    width: 100%;
     height: 45px;
+    border-radius: 10px;
+}
+
+:host ::ng-deep .p-button {
+    width: 100%;
+    height: 45px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.login-text {
+    text-align: center;
+    margin-top: 1rem;
+    color: #475569;
+    font-size: 0.95rem;
 }

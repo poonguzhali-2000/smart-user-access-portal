@@ -1,0 +1,93 @@
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    padding: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:host ::ng-deep .p-card {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+}
+
+:host ::ng-deep .p-card .p-card-header {
+    background: #0f172a;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+:host ::ng-deep .p-card .p-card-body {
+    padding: 2rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #334155;
+    font-size: 0.95rem;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+:host ::ng-deep .p-inputtext,
+:host ::ng-deep .p-password input {
+    width: 100%;
+    padding: 0.9rem;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    transition: all 0.3s ease;
+}
+
+:host ::ng-deep .p-inputtext:focus,
+:host ::ng-deep .p-password input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+}
+
+:host ::ng-deep .p-button {
+    width: 100%;
+    border-radius: 10px;
+    padding: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+:host ::ng-deep .p-button:hover {
+    transform: translateY(-2px);
+}
+
+.signup-text {
+    text-align: center;
+    margin-top: 1rem;
+    color: #64748b;
+    font-size: 0.95rem;
+}

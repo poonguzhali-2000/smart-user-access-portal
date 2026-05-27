@@ -5,7 +5,7 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
@@ -14,6 +14,7 @@ import { MessageService } from 'primeng/api';
   selector: 'app-login',
   standalone: true,
   imports: [
+    RouterModule,
     CommonModule,
     ReactiveFormsModule,
     InputTextModule,
@@ -68,6 +69,7 @@ export class Login {
           console.log(response);
           localStorage.setItem('token', response.token);
           localStorage.setItem('role', response.role);
+          localStorage.setItem('email', this.loginForm.value.email);
           // alert('Login Success');
           this.messageService.add({
             severity: 'success',

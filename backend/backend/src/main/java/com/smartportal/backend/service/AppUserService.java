@@ -40,7 +40,7 @@ public class AppUserService {
     }
 
     public List<AppUser> getAllUsers() {
-        return appUserRepository.findAll();
+    	return appUserRepository.findByActiveTrue();
     }
     
     public LoginResponse login(String email, String password) {
@@ -51,5 +51,23 @@ public class AppUserService {
         }
         String token = jwtUtil.generateToken(user.getEmail());
         return new LoginResponse(token, user.getRole().name());
-    	}
-	}
+    }
+    
+//    public void deleteUser(Long id) {
+//        appUserRepository.deleteById(id);
+//    }
+    
+    public void deleteUser(Long id) {
+        AppUser user = appUserRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setActive(false);
+        appUserRepository.save(user);
+    }
+    
+    public AppUser updateUser(Long id, AppUser updatedUser) {
+        AppUser existingUser = appUserRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        existingUser.setFullName(updatedUser.getFullName());
+        existingUser.setEmail(updatedUser.getEmail());
+        existingUser.setRole(updatedUser.getRole());
+        return appUserRepository.save(existingUser);
+    }
+}

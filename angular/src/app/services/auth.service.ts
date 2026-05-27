@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { LoginRequest } from '../models/login-request';
 
 import { LoginResponse } from '../models/login-response';
+import { SignupRequest } from '../models/signup-request';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,9 @@ export class AuthService {
 
   login( request: LoginRequest ): Observable<LoginResponse> {
     return this.http.post<LoginResponse>( `${this.apiUrl}/login`, request );
-    }
+  }
+
+  signup(data: SignupRequest) {
+    return this.http.post('http://localhost:8080/api/users', data);
+  }
 }

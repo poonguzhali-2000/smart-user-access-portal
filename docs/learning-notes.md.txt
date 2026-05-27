@@ -481,3 +481,134 @@ Used for:
 - Route protection
 - Session persistence
 
+## User Registration (Signup)
+
+Implemented public user registration functionality using Angular Reactive Forms and Spring Boot APIs.
+
+Features:
+- User signup page
+- Full Name, Email, Password fields
+- Confirm Password validation
+- Automatic GENERAL_USER role assignment
+- Registration success handling
+- Redirect to login page after signup
+
+Used:
+- Reactive Forms
+- Validators
+- AuthService signup API
+- Angular Routing
+
+--------------------------------------------------
+
+## Edit User Functionality
+
+Implemented admin-based user update functionality.
+
+Features:
+- Edit user dialog popup
+- Update Full Name
+- Update Email
+- Update Role
+- Real-time table refresh after update
+
+Used:
+- PrimeNG Dialog
+- Angular ngModel
+- PUT API integration
+- UserService updateUser()
+
+--------------------------------------------------
+
+## Delete User Functionality
+
+Implemented admin-only delete functionality for user management.
+
+Features:
+- Delete confirmation popup
+- Admin-only delete controls
+- Dynamic table refresh after deletion
+
+Used:
+- DELETE API
+- UserService deleteUser()
+- Angular event binding
+
+--------------------------------------------------
+
+## Soft Delete Implementation
+
+Implemented soft delete mechanism instead of permanent database deletion.
+
+Features:
+- Users marked inactive instead of being permanently removed
+- Database record preservation
+- Active users filtering
+- Enterprise-style user management
+
+Used:
+- active boolean field
+- findByActiveTrue()
+- update-based delete flow
+
+Why Soft Delete?
+- Prevents permanent data loss
+- Supports audit tracking
+- Allows future restore functionality
+- Enterprise backend practice
+
+--------------------------------------------------
+
+## CRUD Operations
+
+Implemented complete CRUD operations for admin user management.
+
+Features:
+- Create User
+- Read Users
+- Update User
+- Soft Delete User
+
+Access Control:
+- ADMIN → Full CRUD access
+- GENERAL_USER → View-only access
+
+--------------------------------------------------
+
+## Toast Notifications
+
+Implemented PrimeNG toast notifications for real-time user feedback.
+
+Features:
+- Success toast message
+- Error toast message
+- Update success notification
+- Delete success notification
+- API error handling notifications
+
+Used:
+- p-toast
+- MessageService
+- ToastModule
+
+Benefits:
+- Better user experience
+- Real-time operation feedback
+- Professional UI interaction
+
+--------------------------------------------------
+
+## PrimeNG Dialog Form Styling
+
+Enhanced edit user popup dialog UI using custom PrimeNG styling.
+
+Features:
+- Responsive edit dialog
+- Professional form layout
+- Styled update button
+- Improved spacing and alignment
+
+Used:
+- p-dialog
+- PrimeNG form controls
+- Custom CSS styling
