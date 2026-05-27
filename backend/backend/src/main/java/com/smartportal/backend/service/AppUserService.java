@@ -1,14 +1,16 @@
 package com.smartportal.backend.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.smartportal.backend.config.JwtUtil;
 import com.smartportal.backend.dto.LoginResponse;
+import com.smartportal.backend.dto.UserResponseDTO;
 import com.smartportal.backend.entity.AppUser;
 import com.smartportal.backend.repository.AppUserRepository;
 
@@ -39,8 +41,26 @@ public class AppUserService {
         return appUserRepository.findByEmail(email);
     }
 
-    public List<AppUser> getAllUsers() {
-    	return appUserRepository.findByActiveTrue();
+    public Page<UserResponseDTO> getUsers(String search, Pageable pageable) {
+    	Page<AppUser> users;
+        if (search == null || search.trim().isEmpty()) {
+        	users = appUserRepository.findByActiveTrue(pageable);
+        } else {
+        	users = appUserRepository
+                .findByActiveTrueAndFullNameContainingIgnoreCaseOrActiveTrueAndEmailContainingIgnoreCase(
+                        search,
+                        search,
+                        pageable
+                );
+        }
+        return users.map(user ->
+        new UserResponseDTO(
+        		user.getId(),
+        		user.getFullName(),
+        		user.getEmail(),
+        		user.getRole()
+        		)
+        );
     }
     
     public LoginResponse login(String email, String password) {
@@ -50,7 +70,7 @@ public class AppUserService {
             throw new RuntimeException("Invalid password");
         }
         String token = jwtUtil.generateToken(user.getEmail());
-        return new LoginResponse(token, user.getRole().name());
+        return new LoginResponse(token, user.getRole().name(), user.getEmail());
     }
     
 //    public void deleteUser(Long id) {

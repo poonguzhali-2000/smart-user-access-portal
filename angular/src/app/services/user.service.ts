@@ -12,8 +12,12 @@ export class UserService {
 
   constructor( private http: HttpClient ) {}
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>( this.apiUrl );
+  // getUsers(): Observable<User[]> {
+  //   return this.http.get<User[]>(`${this.apiUrl}?delay=3000`);
+  // }
+
+  getUsers(page: number, size: number, search: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}?page=${page}&size=${size}&search=${search}&delay=3000`);
   }
 
   deleteUser(id: number): Observable<any> {

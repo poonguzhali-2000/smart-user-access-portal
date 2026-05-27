@@ -36,6 +36,12 @@ export class Dashboard {
   role = '';
   email = '';
   users: User[] = [];
+  
+  totalRecords = 0;
+  page = 0;
+  rows = 5;
+  searchText = '';
+
   displayEditDialog = false;
   selectedUser: User = {
     id: 0,
@@ -58,24 +64,42 @@ export class Dashboard {
 
   loadUsers() {
     this.loading = true;
-    setTimeout(() => {
-      this.userService.getUsers().subscribe({
+      this.userService.getUsers(this.page, this.rows, this.searchText).subscribe({
         next: (response) => {
-          if (this.role === 'ADMIN') {
-            this.users = response;
+           const data = response.content;
+           if (this.role === 'ADMIN') {
+            this.users = data;
           } else {
-            this.users = response.filter(
-              user => user.email === this.email
+            this.users = data.filter(
+              (user: User) =>
+                user.email === this.email
             );
           }
+          this.totalRecords = response.totalElements;
           this.loading = false;
           console.log(response);
         },
         error: (error) => {
+          this.loading = false;
           console.error(error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Failed to load users'
+          });
         }
       });
-    }, 3000);
+    }
+
+  onPageChange(event: any) {
+    this.page = event.first / event.rows;
+    this.rows = event.rows;
+    this.loadUsers();
+  }
+  
+  onSearch() {
+    this.page = 0;
+    this.loadUsers();
   }
 
   editUser(user: User) {

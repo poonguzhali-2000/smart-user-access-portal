@@ -612,3 +612,173 @@ Used:
 - p-dialog
 - PrimeNG form controls
 - Custom CSS styling
+
+--------------------------------------------------
+
+## Backend Pagination Implementation
+
+Implemented backend pagination using Spring Data Page and Pageable.
+
+Features:
+- Server-side pagination
+- Dynamic page loading
+- Optimized API response handling
+- Reduced frontend data load
+
+Used:
+- Page<AppUser>
+- Pageable
+- PageRequest
+- PrimeNG paginator integration
+
+Benefits:
+- Scalable data rendering
+- Enterprise backend pagination
+- Efficient API communication
+
+--------------------------------------------------
+
+## Backend Search Functionality
+
+Implemented backend-integrated search functionality for filtering users.
+
+Features:
+- Search by Full Name
+- Search by Email
+- Dynamic API-driven filtering
+- Real-time search integration
+
+Used:
+- Repository query methods
+- Pageable search queries
+- Angular search input binding
+
+--------------------------------------------------
+
+## PrimeNG Backend Pagination Integration
+
+Integrated PrimeNG DataTable with backend pagination APIs.
+
+Features:
+- Dynamic page switching
+- API-driven pagination
+- Lazy-style data loading
+- Backend-controlled records
+
+Used:
+- p-table paginator
+- onPage event
+- totalRecords
+- rows
+- Angular API integration
+
+--------------------------------------------------
+
+## DTO Implementation
+
+Implemented DTO pattern for secure API response handling.
+
+Created:
+- UserResponseDTO
+
+Purpose:
+- Prevent password exposure
+- Improve API security
+- Separate entity and response model
+- Enterprise backend architecture
+
+Benefits:
+- Secure frontend responses
+- Cleaner API contracts
+- Production-style implementation
+
+--------------------------------------------------
+
+## Role-Based Backend Authorization
+
+Implemented backend role authorization using Spring Security.
+
+Features:
+- ADMIN-only API protection
+- JWT-based authorization
+- Secured CRUD operations
+- Role-based API access control
+
+Used:
+- @PreAuthorize
+- ROLE_ADMIN
+- JwtAuthFilter
+- Spring Security RBAC
+
+Benefits:
+- Prevents unauthorized API access
+- Backend-level security enforcement
+- Enterprise authorization flow
+
+--------------------------------------------------
+
+## Async API Delay Handling
+
+Implemented artificial backend API delay for async processing demonstration.
+
+Features:
+- Simulated API loading delay
+- Loading spinner integration
+- Async UI rendering
+- Real-time loading state handling
+
+Used:
+- delay request parameter
+- Thread.sleep()
+- PrimeNG Progress Spinner
+
+Benefits:
+- Demonstrates async application behavior
+- Improved frontend UX handling
+- Assignment requirement implementation
+
+--------------------------------------------------
+
+## General User Dashboard UI
+
+Implemented dedicated dashboard UI for GENERAL_USER role.
+
+Features:
+- Read-only dashboard
+- User profile section
+- Access permission visualization
+- Restricted feature visibility
+- Secure role-based rendering
+
+Displayed:
+- Email
+- Role
+- JWT secured status
+- Access permissions
+
+Benefits:
+- Clear RBAC visualization
+- Professional enterprise UI
+- Improved user experience
+
+--------------------------------------------------
+
+## Backend Security Improvements
+
+Enhanced backend API security using JWT authentication and role authorization.
+
+Implemented:
+- JWT validation filter
+- Protected APIs
+- Role-based API restrictions
+- Secure authentication context
+
+Fixed:
+- Authority mapping issue
+- Unauthorized API access
+- Backend role validation
+
+Benefits:
+- Secure API communication
+- Enterprise authentication flow
+- Strong backend protection

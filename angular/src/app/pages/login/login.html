@@ -9,6 +9,9 @@
             <div class="field">
                 <label>Email</label>
                 <input type="email" pInputText formControlName="email" placeholder="Enter email" class="full-width"/>
+                @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+                    <small class="error-text">Valid email is required</small>
+                }
             </div>
 
             <div class="field">
@@ -20,11 +23,24 @@
                             }"
                 >
                 </p-password>
+                @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+                    <small class="error-text">Password is required</small>
+                }
             </div>
+
+            <div class="field mt-3">
+                <label>Role</label>
+                <select formControlName="role" class="w-full p-inputtext">
+                    <option value="">Select Role</option>
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="GENERAL_USER">GENERAL_USER</option>
+                </select>
+            </div>
+
             <button pButton type="submit" label="Login" class="login-btn" [loading]="loading"></button>
 
             <p class="signup-text">Don't have an account?</p>
-            <button pButton label="Create Account" class="w-full mt-2" severity="secondary" routerLink="/signup"></button>
+            <button pButton type="button" label="Create Account" class="w-full mt-2" severity="secondary" routerLink="/signup"></button>
         </form>
     </div>
 </div>

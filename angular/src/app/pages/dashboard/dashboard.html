@@ -5,6 +5,7 @@
         <h2>Smart User Access Portal</h2>
         <button pButton label="Logout" severity="danger" (click)="logout()"></button>
     </div>
+    
     <div class="dashboard-content">
         <div class="welcome-card">
             <h1>Welcome {{ role === 'ADMIN' ? 'Admin' : 'User' }}</h1>
@@ -18,54 +19,95 @@
                 <p>You can manage users and system data.</p>
             </div>
         }
-
+        
         @if (role === 'GENERAL_USER') {
-            <div class="user-card">
-                <h2>User Dashboard</h2>
-                <p>View-only access granted.</p>
+            <div class="user-dashboard-container">
+                <div class="user-card">
+                    <h2>User Dashboard</h2>
+                    <p>You can securely view your account information and authorized records.</p>
+                    <p-tag value="READ ONLY ACCESS" severity="info"></p-tag>
+                </div>
+                
+                <div class="profile-card">
+                    <h2>My Profile</h2>
+                    <div class="profile-item">
+                        <label>Email</label>
+                        <p>{{ email }}</p>
+                    </div>
+                    
+                    <div class="profile-item">
+                        <label>Role</label>
+                        <p>{{ role }}</p>
+                    </div>
+                    
+                    <div class="profile-item">
+                        <label>Authentication</label>
+                        <p>JWT Secured</p>
+                    </div>
+                    
+                    <div class="profile-item">
+                        <label>Status</label>
+                        <p class="active-status">Active</p>
+                    </div>
+                </div>
+                
+                <div class="permissions-card">
+                    <h2>User Permissions</h2>
+                    <ul>
+                        <li>✔ View own account details</li>
+                        <li>✔ Search accessible records</li>
+                        <li>✔ Access secured dashboard</li>
+                        <li>✘ Edit users</li>
+                        <li>✘ Delete users</li>
+                        <li>✘ Access admin controls</li>
+                    </ul>
+                </div>
             </div>
         }
-
-        <div class="table-card">
-            <h2>User Records</h2>
-            @if (loading) {
-                <div class="spinner-container">
-                    <p-progressSpinner></p-progressSpinner>
+        
+        @if (role === 'ADMIN') {
+            <div class="table-card">
+                <h2>User Records</h2>
+                @if (loading) {
+                    <div class="spinner-container">
+                        <p-progressSpinner></p-progressSpinner>
+                    </div>
+                }
+            
+                <div class="mb-3">
+                    <input pInputText type="text" placeholder="Search users..." class="w-full" [(ngModel)]="searchText" (input)="onSearch()">
                 </div>
-            }
-            @if (!loading) {
-            <p-table [value]="users" [tableStyle]="{ 'min-width': '60rem' }">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>S.NO</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        @if (role === 'ADMIN') {
+            
+                @if (!loading) {
+                <p-table [value]="users" [paginator]="true" [rows]="rows" [totalRecords]="totalRecords" (onPage)="onPageChange($event)" [loading]="loading" [tableStyle]="{ 'min-width': '60rem' }">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>S.NO</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
                             <th>Actions</th>
-                        }
-                    </tr>
-                </ng-template>
+                        </tr>
+                    </ng-template>
 
-                <ng-template pTemplate="body" let-user let-rowIndex="rowIndex">
-                    <tr>
-                        <td>{{ rowIndex + 1 }}</td>
-                        <td>{{ user.fullName }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>
-                            <p-tag [value]="user.role" [severity]="getSeverity(user.role)"></p-tag>
-                        </td>
-                        @if (role === 'ADMIN') {
+                    <ng-template pTemplate="body" let-user let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{ page * rows + rowIndex + 1 }}</td>
+                            <td>{{ user.fullName }}</td>
+                            <td>{{ user.email }}</td>
                             <td>
-                                <button pButton icon="pi pi-pencil" severity="contrast" class="mr-2" (click)="editUser(user)"></button>
-                                <button pButton icon="pi pi-trash" severity="danger" (click)="deleteUser(user.id)"></button>
+                                <p-tag [value]="user.role" [severity]="getSeverity(user.role)"></p-tag>
                             </td>
-                        }
-                    </tr>
-                </ng-template>
-            </p-table>
+                                <td>
+                                    <button pButton icon="pi pi-pencil" severity="contrast" class="mr-2" (click)="editUser(user)"></button>
+                                    <button pButton icon="pi pi-trash" severity="danger" (click)="deleteUser(user.id)"></button>
+                                </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            }
+            </div>
         }
-        </div>
     </div>
 </div>
 

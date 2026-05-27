@@ -81,3 +81,9 @@
     color: #475569;
     font-size: 0.95rem;
 }
+
+.error-text {
+    color: #ef4444;
+    margin-top: 5px;
+    font-size: 0.85rem;
+}

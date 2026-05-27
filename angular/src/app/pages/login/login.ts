@@ -40,21 +40,9 @@ export class Login {
     private messageService: MessageService
   ) {
     this.loginForm = this.fb.group({
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email
-        ]
-      ],
-
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(4)
-        ]
-      ]
+      email: ['',[Validators.required, Validators.email]],
+      password: ['',[Validators.required, Validators.minLength(4)]],
+      role: ['', [Validators.required]]
     });
   }
   
@@ -65,22 +53,30 @@ export class Login {
     }
     this.loading = true;
     this.authService.login(this.loginForm.value).subscribe({
-        next: (response) => {
-          console.log(response);
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('role', response.role);
-          localStorage.setItem('email', this.loginForm.value.email);
-          // alert('Login Success');
+      next: (response) => {
+        console.log(response);
+        if (response.role !==this.loginForm.value.role) {
           this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Login Successful'
+            severity: 'error',
+            summary: 'Access Denied',
+            detail: 'Selected role does not match user role'
           });
           this.loading = false;
-          setTimeout(() => {
-            this.router.navigate(['/dashboard']);
-          }, 1500);
-        },
+          return;
+        }
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('role', response.role);
+        localStorage.setItem('email', response.email);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Login Successful'
+        });
+        this.loading = false;
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 1500);
+      },
         error: (error) => {
           this.messageService.add({
             severity: 'error',
